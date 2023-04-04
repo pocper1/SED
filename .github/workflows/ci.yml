@@ -11,6 +11,5 @@ jobs:
           jenkinsci/jfr-container-action@master
         with:
           command: run
-          jenkinsfile: Jenkinsfile
-          pluginstxt: plugins.txt
+          jenkinsfile: ../../../Jenkinsfile
           jcasc: jcasc.yml
