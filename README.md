@@ -1,19 +1,28 @@
 # SED
 
+[TOC]
 
-# Official Jenkins Docker image
+## 使用套件
+- docker
+> 需要在電腦上安裝docker，可以透過local build up jenkins
+- github action
+> 在github 上面跑jenkins
+- jenkinsfile
+> 編輯CI流程
 
-[![Docker Stars](https://img.shields.io/docker/stars/jenkins/jenkins.svg)](https://hub.docker.com/r/jenkins/jenkins/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/jenkins/jenkins.svg)](https://hub.docker.com/r/jenkins/jenkins/)
-[![Join the chat at https://gitter.im/jenkinsci/docker](https://badges.gitter.im/jenkinsci/docker.svg)](https://gitter.im/jenkinsci/docker?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+## 操作步驟
+1. 下指令，在本地跑docker
+```bash=
+docker run -p 8080:8080 -p 50000:50000 --restart=on-failure jenkins/jenkins:lts-jdk11
+```
+2. 跑起來後 `localhost:8080`，便是jenkins website
+3. 將cmd 上面顯示的admin password 貼到website　上面
 
-The Jenkins Continuous Integration and Delivery server [available on Docker Hub](https://hub.docker.com/r/jenkins/jenkins).
 
-This is a fully functional Jenkins server.
-[https://jenkins.io/](https://jenkins.io/).
-
-<img src="https://jenkins.io/sites/default/files/jenkins_logo.png"/>
-
+## 參考資料
+- https://ithelp.ithome.com.tw/articles/10267686
+- [綁定slack](https://hackmd.io/@MkYmwlryTS2OThC9ZtSHTw/SyPe9-dcK)
+- [Github to jenkins](https://medium.com/@koen.vantomme/how-to-integrate-your-github-repository-to-your-jenkins-project-802168ad1777)
 # Usage
 
 ```
@@ -312,38 +321,3 @@ To start the Jenkins instance and the other services defined in the `docker-comp
 This will pull the necessary images from Docker Hub if they are not already present on your system, and start the services in the background.
 
 You can then access the Jenkins web interface on `http://localhost:8080` on your host system to configure and manage your Jenkins instance (where `localhost` points to the published port by your Docker Engine).
-
-### Updating plugins file
-
-The [plugin-installation-manager-tool](https://github.com/jenkinsci/plugin-installation-manager-tool) supports updating the plugin file for you.
-
-Example command:
-
-```command
-JENKINS_IMAGE=jenkins/jenkins:lts-jdk11
-docker run -it ${JENKINS_IMAGE} bash -c "stty -onlcr && jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt --available-updates --output txt" >  plugins2.txt
-mv plugins2.txt plugins.txt
-```
-
-## Upgrading
-
-All the data needed is in the /var/jenkins_home directory - so depending on how you manage that - depends on how you upgrade.
-Generally - you can copy it out - and then "docker pull" the image again - and you will have the latest LTS - you can then start up with -v pointing to that data (/var/jenkins_home) and everything will be as you left it.
-
-As always - please ensure that you know how to drive docker - especially volume handling!
-
-If you mount the Jenkins home directory to a [Docker named volume](https://docs.docker.com/storage/volumes/), then the upgrade consists of `docker pull` and nothing more.
-
-We recommend using `docker compose`, especially in cases where the user is also running a parallel nginx/apache container as a reverse proxy for the Jenkins container.
-
-### Upgrading plugins
-
-By default, plugins will be upgraded if they haven't been upgraded manually and if the version from the docker image is newer than the version in the container.
-Versions installed by the docker image are tracked through a marker file.
-
-To force upgrades of plugins that have been manually upgraded, run the docker image with `-e PLUGINS_FORCE_UPGRADE=true`.
-
-The default behaviour when upgrading from a docker image that didn't write marker files is to leave existing plugins in place.
-If you want to upgrade existing plugins without marker you may run the docker image with `-e TRY_UPGRADE_IF_NO_MARKER=true`.
-Then plugins will be upgraded if the version provided by the docker image is newer.
-
