@@ -23,6 +23,9 @@ docker run -p 8080:8080 -p 50000:50000 --restart=on-failure jenkins/jenkins:lts-
 - https://ithelp.ithome.com.tw/articles/10267686
 - [綁定slack](https://hackmd.io/@MkYmwlryTS2OThC9ZtSHTw/SyPe9-dcK)
 - [Github to jenkins](https://medium.com/@koen.vantomme/how-to-integrate-your-github-repository-to-your-jenkins-project-802168ad1777)
+- [To remote server](https://faun.pub/configure-jenkins-ci-cd-with-github-and-deploy-to-server-via-ssh-ade1fdc996fc)
+- [How to install Jenkins using Docker Compose?](https://www.czerniga.it/2021/11/07/how-to-install-jenkins-using-docker-compose/)
+- [Github example - jenkins-springBoot](https://github.com/akum47/spring-boot-ci-cd)
 # Usage
 
 ```

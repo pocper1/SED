@@ -5,6 +5,7 @@ jenkins:
           - key: hello
             value: world
 
+
 uses:
   jenkinsci/jfr-container-action@master
 with:
@@ -12,3 +13,18 @@ with:
   jenkinsfile: Jenkinsfile
   pluginstxt: plugins.txt
   jcasc: jcasc.yml
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - string:
+              scope: GLOBAL
+              id: slack_token
+              secret: "TyP2wF84v9nNZsETJPpOs7J2"
+              description: slack_token
+​
+unclassified:
+  slackNotifier:
+    teamDomain: sedgroup5 # i.e. your-company (just the workspace name not the full url)
+    tokenCredentialId: slack_token

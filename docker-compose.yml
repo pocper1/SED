@@ -2,10 +2,9 @@ services:
   jenkins:
     image: jenkins/jenkins:lts
     ports:
-      - "8080:8080"
+      - "80:8080"
     volumes:
-      - jenkins_home:/var/jenkins_home
-  ssh-agent:
-    image: jenkins/ssh-agent
-volumes:
-  jenkins_home:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/local/jenkins_home:/var/jenkins_home
+      - /opt/local/jenkins_home/plugins:/usr/share/jenkins/ref/plugins
+      - /opt/local/jenkins_home/plugins.txt:/usr/share/jenkins/ref/plugins.txt
