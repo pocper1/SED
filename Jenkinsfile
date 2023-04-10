@@ -5,8 +5,6 @@ pipeline {
     }
 
     environment {
-        JAVA_HOME='/home/ajanthan/applications/jdk-11.0.2'
-
         SOURCE_REPOSITORY_URL = 'https://github.com/pocper1/SED.git'
         BRANCH = 'master'
         GIT_CREDINTIALS_ID='<GIT_CRED>'

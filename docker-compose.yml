@@ -2,7 +2,7 @@ services:
   jenkins:
     image: jenkins/jenkins:lts
     ports:
-      - "80:8080"
+      - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/local/jenkins_home:/var/jenkins_home
