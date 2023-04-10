@@ -13,32 +13,32 @@ pipeline {
         // SONAR_LOGIN='<SONAR_QUBE_TOKEN>'
     }
     stages {
-        stage ('Checkout source') {
-            steps {
-                echo "Checkout SCM"
-                git branch: "${BRANCH}",credentialsId: "${GIT_CREDINTIALS_ID}",url: "${SOURCE_REPOSITORY_URL}"
-            }
-        }
+//         stage ('Checkout source') {
+//             steps {
+//                 echo "Checkout SCM"
+//                 git branch: "${BRANCH}",credentialsId: "${GIT_CREDINTIALS_ID}",url: "${SOURCE_REPOSITORY_URL}"
+//             }
+//         }
         
-        stage ('Gather facts') {
-            steps {
-                script {
+//         stage ('Gather facts') {
+//             steps {
+//                 script {
+//
+//                 version = sh (script: "./gradlew properties -q | grep \"version:\" | awk '{print \$2}'",returnStdout: true).trim();
+//                 groupid = sh (script: "./gradlew properties -q | grep \"group:\" | awk '{print \$2}'",returnStdout: true).trim();
+//                 artifactId = sh (script: "./gradlew properties -q | grep \"name:\" | awk '{print \$2}'",returnStdout: true).trim();
+//
+//                 }
+//                 echo "Building project in version: $version , groupid: $groupid , artifactId : $artifactId";
+//             }
+//         }
 
-                version = sh (script: "./gradlew properties -q | grep \"version:\" | awk '{print \$2}'",returnStdout: true).trim();
-                groupid = sh (script: "./gradlew properties -q | grep \"group:\" | awk '{print \$2}'",returnStdout: true).trim();
-                artifactId = sh (script: "./gradlew properties -q | grep \"name:\" | awk '{print \$2}'",returnStdout: true).trim();
-
-                }
-                echo "Building project in version: $version , groupid: $groupid , artifactId : $artifactId";
-            }
-        }
-
-        stage ('Build JAR') {
-            steps {
-                echo "Building version ${version}"
-                sh (script: "./gradlew clean build -x test",returnStdout: true)
-            }
-        }
+//         stage ('Build JAR') {
+//             steps {
+//                 echo "Building version ${version}"
+//                 sh (script: "./gradlew clean build -x test",returnStdout: true)
+//             }
+//         }
 
         stage ('Unit Tests') {
             steps {
